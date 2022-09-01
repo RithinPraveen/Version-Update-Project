@@ -1,4 +1,23 @@
-const Update = {
+interface AppUpdate {
+    AppName: string,
+    Version: {
+        VersionName: string,
+        RelaseDate: string,
+        bugId: string,
+        features: string,
+        Author: string,
+        Type: string
+    }[],
+    Bugs: {
+        Id: string,
+        Description: string
+    }[],
+    Types: string[]
+
+
+}
+
+let Update : AppUpdate = {
     AppName: "YouTube",
     Version: [
         {
@@ -63,30 +82,29 @@ const Update = {
     Types: ["MAJOR", "PATCH", "ENHANCEMENT"]
 }
 
-//---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------------
 
 //How many releases were made in a year ?----------------------------------------
 
-EnterYear = "2021"
+let EnterYear: any = "2021"
 
-function FilterYear(arr, searchKey) {
+function FilterYear(arr:any[], searchKey:any[]) {
     return arr.filter(function (obj) {
         return Object.keys(obj).some(function (key) {
             return obj[key].includes(searchKey);
         })
     });
 }
-TotalNumberOfUpdate = FilterYear(Update.Version, EnterYear).length
+let TotalNumberOfUpdate = FilterYear(Update.Version, EnterYear).length
 console.log("1) How many releases were made in a year ?");
 console.log(`   Total releases made in a year : ${TotalNumberOfUpdate}`);
 console.log("--------------------------------------------------");
 
-
 //In which release specific bugId is present?------------------------------------------------------------
 
-EnterbugId = "#240"
+let EnterbugId : any = "#240"
 
-function Filterbug(arr, searchKey) {
+function Filterbug(arr:any[], searchKey:any[]) {
     return arr.filter(obj => obj.bugId == searchKey);
 }
 Filterbug(Update.Version, EnterbugId).forEach(i => {
@@ -95,12 +113,12 @@ Filterbug(Update.Version, EnterbugId).forEach(i => {
     console.log("--------------------------------------------------");
 })
 
-
 //which author has worked in many releases ?-------------------------------------------------------------
 
-function FindAuthors(arr, key) {
-    let Authors = [];
+function FindAuthors(arr:any[], key:string) {
+    let Authors:any[] = [];
     arr.forEach((x) => {
+    
         if (Authors.some((val) => { return val[key] == x[key] })) {
             Authors.forEach((k) => {
                 if (k[key] === x[key]) {
@@ -108,7 +126,7 @@ function FindAuthors(arr, key) {
                 }
             })
         } else {
-            let a = {}
+            let a :any = {}
             a[key] = x[key]
             a["releases"] = 1
             Authors.push(a);
@@ -125,19 +143,19 @@ function FindAuthors(arr, key) {
 
 //How many releases were type of major?-------------------------------------------------------------------
 
-function FilterType(arr, searchKey) {
+function FilterType(arr:any[], searchKey:string) {
     return arr.filter(obj => obj.Type == searchKey);
 }
-TotalType = FilterType(Update.Version, "MAJOR").length
+let TotalType = FilterType(Update.Version, "MAJOR").length
 console.log("4) How many releases were type of major?");
 console.log(`   Total releases made in Type of Major are : ${TotalType}`);
 console.log("--------------------------------------------------");
 
 //How many versions have the specific feature name?-------------------------------------------------------
 
-EnterFeature = "notch fix"
+let EnterFeature = "notch fix"
 
-function FilterFeature(arr, searchKey) {
+function FilterFeature(arr:any[], searchKey:string) {
     return arr.filter(function (obj) {
         return Object.keys(obj).some(function (key) {
             return obj[key].includes(searchKey);
@@ -149,3 +167,4 @@ FilterFeature(Update.Version, EnterFeature).forEach(i => {
     console.log(` The feature "${EnterFeature}" is present the releases : ${i.VersionName}`);
     console.log("--------------------------------------------------");
 })
+//--------------------------------------------------------------------------------------------------------
