@@ -49,7 +49,7 @@ const Update = {
         },
         {
             Id: "#240",
-            Description: "There is no such thing as “the screen.” A laptop screen is not a TV screen is not a movie screen is not an iPad screen is not a Kindle screen."
+            Description: "There is no such thing as the screen. A laptop screen is not a TV screen is not a movie screen is not an iPad screen is not a Kindle screen."
         },
         {
             Id: "#201",
@@ -62,7 +62,7 @@ const Update = {
     ],
     Types: ["MAJOR", "PATCH", "ENHANCEMENT"]
 }
-
+ console.table(Update.Version)
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 //How many releases were made in a year ?----------------------------------------
@@ -76,6 +76,8 @@ function FilterYear(arr, searchKey) {
         })
     });
 }
+console.log(FilterYear(Update.Version, EnterYear))
+
 TotalNumberOfUpdate = FilterYear(Update.Version, EnterYear).length
 console.log("1) How many releases were made in a year ?");
 console.log(`   Total releases made in a year : ${TotalNumberOfUpdate}`);
